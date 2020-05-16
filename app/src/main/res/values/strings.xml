@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SliderExample</string>
+
+    <string name="tab1">Home</string>
+    <string name="tab2">Notes</string>
+    <string name="tab3">Calendar</string>
+
+</resources>
