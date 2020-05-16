@@ -1,6 +1,7 @@
 package com.example.sliderexample;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,10 +25,15 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
     private ArrayList<String> al;
+    private ArrayList<Card> arcards;
     private ArrayList<String> cards;
     private ArrayAdapter<String> arrayAdapter;
     private int i;
     private ConstraintLayout mBackground;
+    DBCards dbHelper;
+    static SQLiteDatabase database;
+    private static final int SLIDE_LEFT= 0;
+    private static final int SLIDE_RIGHT= 1;
 
     public HomeFragment() {
         //required empty public constructor
@@ -52,18 +58,22 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //textTitle.setText("Doing some things with fragments");
+        dbHelper = DBCards.getInstance(getContext());
+        database = dbHelper.getWritableDatabase();
+        dbHelper.logDB();
+        database.close();
+
+        arcards= dbHelper.getObjectListFromDB();
+        for(Card temp: arcards){
+            Log.v("card",temp.toString() );
+
+        }
+
+        al=new ArrayList<>();
+        al.add("PLAY");
+        al.addAll(dbHelper.getListFromDB()) ;
 
 
-
-        al = new ArrayList<>();
-        al.add("php");
-        al.add("c");
-        al.add("python");
-        al.add("java");
-        al.add("html");
-        al.add("c++");
-        al.add("css");
-        al.add("javascript");
 
         arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.item, R.id.helloText, al );
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView)view.findViewById(R.id.frame);
@@ -79,11 +89,20 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onLeftCardExit(Object dataObject) {
-                //Do something on the left!
-                //You also have access to the original object.
-                //If you want to use it just cast it (String) dataObject
+
                 makeToast(getContext(), "Left!");
                 mBackground.setBackgroundResource(R.drawable.truenew);
+                try{
+                    Card card = dbHelper.getCardByState(dataObject.toString());
+                    Log.v("cards",card.toString());
+
+
+                }catch(NullPointerException npe){
+                    Log.v("cards","no card found");
+
+
+                }
+
             }
 
             @Override
