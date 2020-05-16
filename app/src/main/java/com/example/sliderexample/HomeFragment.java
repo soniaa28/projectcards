@@ -91,11 +91,14 @@ public class HomeFragment extends Fragment {
             public void onLeftCardExit(Object dataObject) {
 
                 makeToast(getContext(), "Left!");
-                mBackground.setBackgroundResource(R.drawable.truenew);
+
                 try{
                     Card card = dbHelper.getCardByState(dataObject.toString());
                     Log.v("cards",card.toString());
-
+                  if (card.getTF() == SLIDE_LEFT){
+                      mBackground.setBackgroundResource(R.drawable.truenew);
+                  }else{mBackground.setBackgroundResource(R.drawable.falsenew);
+                  }
 
                 }catch(NullPointerException npe){
                     Log.v("cards","no card found");
@@ -108,7 +111,21 @@ public class HomeFragment extends Fragment {
             @Override
             public void onRightCardExit(Object dataObject) {
                 makeToast(getContext(), "Right!");
-                mBackground.setBackgroundResource(R.drawable.falsenew);
+
+                try{
+                    Card card = dbHelper.getCardByState(dataObject.toString());
+                    Log.v("cards",card.toString());
+                    if (card.getTF() == SLIDE_RIGHT){
+                        mBackground.setBackgroundResource(R.drawable.truenew);
+                    }else{mBackground.setBackgroundResource(R.drawable.falsenew);
+                    }
+
+                }catch(NullPointerException npe){
+                    Log.v("cards","no card found");
+
+
+                }
+
             }
 
             @Override
