@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
@@ -26,7 +27,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<String> cards;
     private ArrayAdapter<String> arrayAdapter;
     private int i;
-    private RelativeLayout mBackground;
+    private ConstraintLayout mBackground;
 
     public HomeFragment() {
         //required empty public constructor
@@ -41,7 +42,7 @@ public class HomeFragment extends Fragment {
 
       Window w =  getActivity().getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        mBackground=(RelativeLayout)rootView.findViewById(R.id.background);
+        mBackground=rootView.findViewById(R.id.background);
 
         return rootView;
     }
