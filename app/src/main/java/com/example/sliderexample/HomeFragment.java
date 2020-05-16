@@ -90,14 +90,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onLeftCardExit(Object dataObject) {
 
-                makeToast(getContext(), "Left!");
+
 
                 try{
                     Card card = dbHelper.getCardByState(dataObject.toString());
                     Log.v("cards",card.toString());
                   if (card.getTF() == SLIDE_LEFT){
                       mBackground.setBackgroundResource(R.drawable.truenew);
+                      makeToast(getContext(), "True");
                   }else{mBackground.setBackgroundResource(R.drawable.falsenew);
+                      makeToast(getContext(), "False");
                   }
 
                 }catch(NullPointerException npe){
@@ -110,14 +112,16 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onRightCardExit(Object dataObject) {
-                makeToast(getContext(), "Right!");
+
 
                 try{
                     Card card = dbHelper.getCardByState(dataObject.toString());
                     Log.v("cards",card.toString());
                     if (card.getTF() == SLIDE_RIGHT){
                         mBackground.setBackgroundResource(R.drawable.truenew);
+                        makeToast(getContext(), "True");
                     }else{mBackground.setBackgroundResource(R.drawable.falsenew);
+                        makeToast(getContext(), "False");
                     }
 
                 }catch(NullPointerException npe){
