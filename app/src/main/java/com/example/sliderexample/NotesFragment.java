@@ -9,9 +9,33 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.sliderexample.topics.RecyclerViewAdapter;
 
 public class NotesFragment extends Fragment {
-    private TextView textTitle;
+    RecyclerView recyclerView;
+
+    RecyclerView.Adapter recyclerView_Adapter;
+
+    RecyclerView.LayoutManager recyclerViewLayoutManager;
+    String[] numbers = {
+            "one",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six",
+            "seven",
+            "eight",
+            "nine",
+            "ten",
+            "eleven",
+
+    };
+
+
 
     public NotesFragment() {
         //required empty public constructor
@@ -24,7 +48,14 @@ public class NotesFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_notes, container, false);
 
-        textTitle = rootView.findViewById(R.id.title_notes);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view1);
+        recyclerViewLayoutManager = new GridLayoutManager(getContext(), 2);
+
+        recyclerView.setLayoutManager(recyclerViewLayoutManager);
+
+        recyclerView_Adapter = new RecyclerViewAdapter(getContext(),numbers);
+
+        recyclerView.setAdapter(recyclerView_Adapter);
 
         return rootView;
     }
