@@ -18,4 +18,53 @@
         tools:layout_editor_absoluteX="-39dp"
         tools:layout_editor_absoluteY="27dp" />
 
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:paddingTop="30dp"
+        android:paddingLeft="70dp"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="73dp">
+
+
+        <TextView
+            android:id="@+id/life1"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:background="@drawable/life"
+           android:layout_marginRight="5dp"
+            android:layout_weight="1"
+           android:paddingRight="10dp"
+            />
+
+        <TextView
+            android:id="@+id/life2"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:background="@drawable/life"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/life3"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:background="@drawable/life"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+    <Button
+        android:text="Restart This App"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/restart"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

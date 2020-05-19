@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,10 +31,17 @@ public class HomeFragment extends Fragment {
     private ArrayAdapter<String> arrayAdapter;
     private int i;
     private ConstraintLayout mBackground;
+    public TextView tv;
     DBCards dbHelper;
     static SQLiteDatabase database;
     private static final int SLIDE_LEFT= 0;
     private static final int SLIDE_RIGHT= 1;
+    public int count=3;
+    public int [] progress={R.id.life1, R.id.life2,R.id.life3};
+    public  ArrayList<String> hearts;
+
+
+    Button bt_restart;
 
     public HomeFragment() {
         //required empty public constructor
@@ -46,16 +54,18 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-      Window w =  getActivity().getWindow();
+
+
+        Window w =  getActivity().getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mBackground=rootView.findViewById(R.id.background);
 
-        return rootView;
+        return rootView ;
     }
 
-    // Do all the job here (like creating database object, doing some job with changing information, etc...
+        // Do all the job here (like creating database object, doing some job with changing information, etc...
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //textTitle.setText("Doing some things with fragments");
         dbHelper = DBCards.getInstance(getContext());
@@ -87,6 +97,7 @@ public class HomeFragment extends Fragment {
                 arrayAdapter.notifyDataSetChanged();
             }
 
+
             @Override
             public void onLeftCardExit(Object dataObject) {
 
@@ -98,9 +109,13 @@ public class HomeFragment extends Fragment {
                   if (card.getTF() == SLIDE_LEFT){
                       mBackground.setBackgroundResource(R.drawable.truenew);
                       makeToast(getContext(), "True");
-                  }else{mBackground.setBackgroundResource(R.drawable.falsenew);
+                  }else{
+
+                      TextView tv = view.findViewById(progress[count]);
+                      tv.setBackgroundResource(R.drawable.dead);}
+                      mBackground.setBackgroundResource(R.drawable.falsenew);
                       makeToast(getContext(), "False");
-                  }
+
 
                 }catch(NullPointerException npe){
                     Log.v("cards","no card found");
@@ -117,12 +132,17 @@ public class HomeFragment extends Fragment {
                 try{
                     Card card = dbHelper.getCardByState(dataObject.toString());
                     Log.v("cards",card.toString());
-                    if (card.getTF() == SLIDE_RIGHT){
-                        mBackground.setBackgroundResource(R.drawable.truenew);
-                        makeToast(getContext(), "True");
-                    }else{mBackground.setBackgroundResource(R.drawable.falsenew);
-                        makeToast(getContext(), "False");
-                    }
+
+                        if (card.getTF() == SLIDE_RIGHT) {
+                            mBackground.setBackgroundResource(R.drawable.truenew);
+                            makeToast(getContext(), "True");
+                        } else {
+
+                            mBackground.setBackgroundResource(R.drawable.falsenew);
+                            makeToast(getContext(), "False");
+
+                            };
+
 
                 }catch(NullPointerException npe){
                     Log.v("cards","no card found");
@@ -164,6 +184,7 @@ public class HomeFragment extends Fragment {
     static void makeToast(Context ctx, String s){
         Toast.makeText(ctx, s, Toast.LENGTH_SHORT).show();
     }
+
 
 
 
