@@ -58,13 +58,5 @@
             android:layout_weight="1"
             />
     </LinearLayout>
-    <Button
-        android:text="Restart This App"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/restart"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

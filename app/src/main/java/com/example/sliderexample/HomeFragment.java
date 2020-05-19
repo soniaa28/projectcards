@@ -22,23 +22,22 @@ import androidx.fragment.app.Fragment;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
     private ArrayList<String> al;
     private ArrayList<Card> arcards;
-    private ArrayList<String> cards;
     private ArrayAdapter<String> arrayAdapter;
     private int i;
     private ConstraintLayout mBackground;
-    public TextView tv;
-    DBCards dbHelper;
-    static SQLiteDatabase database;
+    private DBCards dbHelper;
+
     private static final int SLIDE_LEFT= 0;
     private static final int SLIDE_RIGHT= 1;
-    public int count=3;
-    public int [] progress={R.id.life1, R.id.life2,R.id.life3};
-    public  ArrayList<String> hearts;
+
+    public ArrayList<TextView> hearts;
 
 
     Button bt_restart;
@@ -54,11 +53,17 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-
+        TextView l1 = rootView.findViewById(R.id.life1);
+        TextView l2 = rootView.findViewById(R.id.life2);
+        TextView l3 = rootView.findViewById(R.id.life3);
+        hearts = new ArrayList<>();
+        hearts.add(l1); hearts.add(l2); hearts.add(l3);
 
         Window w =  getActivity().getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mBackground=rootView.findViewById(R.id.background);
+
+
 
         return rootView ;
     }
@@ -69,21 +74,18 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //textTitle.setText("Doing some things with fragments");
         dbHelper = DBCards.getInstance(getContext());
-        database = dbHelper.getWritableDatabase();
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
         dbHelper.logDB();
         database.close();
 
-        arcards= dbHelper.getObjectListFromDB();
+        arcards = dbHelper.getObjectListFromDB();
         for(Card temp: arcards){
             Log.v("card",temp.toString() );
-
         }
 
-        al=new ArrayList<>();
+        al = new ArrayList<>();
         al.add("PLAY");
         al.addAll(dbHelper.getListFromDB()) ;
-
-
 
         arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.item, R.id.helloText, al );
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView)view.findViewById(R.id.frame);
@@ -100,9 +102,6 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onLeftCardExit(Object dataObject) {
-
-
-
                 try{
                     Card card = dbHelper.getCardByState(dataObject.toString());
                     Log.v("cards",card.toString());
@@ -110,17 +109,18 @@ public class HomeFragment extends Fragment {
                       mBackground.setBackgroundResource(R.drawable.truenew);
                       makeToast(getContext(), "True");
                   }else{
+                      //take last heart from array and make it invisible
+                      hearts.get(hearts.size()-1).setVisibility(View.INVISIBLE);
+                      //delete last heart, so next time we will make invisible another last element (heart)
+                      hearts.remove(hearts.size()-1);
 
-                      TextView tv = view.findViewById(progress[count]);
-                      tv.setBackgroundResource(R.drawable.dead);}
                       mBackground.setBackgroundResource(R.drawable.falsenew);
                       makeToast(getContext(), "False");
-
-
+                  }
                 }catch(NullPointerException npe){
                     Log.v("cards","no card found");
-
-
+                }catch (ArrayIndexOutOfBoundsException aie){
+                    Toast.makeText(getContext(),"Game over!", Toast.LENGTH_LONG).show();
                 }
 
             }
