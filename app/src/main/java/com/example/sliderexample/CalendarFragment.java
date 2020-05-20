@@ -1,17 +1,22 @@
 package com.example.sliderexample;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 public class CalendarFragment extends Fragment {
-    private TextView textTitle;
+    GridLayout mainGrid;
+
 
     public CalendarFragment() {
         //required empty public constructor
@@ -24,7 +29,7 @@ public class CalendarFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
 
-        textTitle = rootView.findViewById(R.id.title_calendar);
+
 
         return rootView;
     }
@@ -34,7 +39,43 @@ public class CalendarFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //textTitle.setText("Doing some things with fragments");
+        mainGrid=(GridLayout)view.findViewById(R.id.mainGrid);
+        //setSingleEvent(mainGrid);
+        setToggleEvent(mainGrid);
+
+    }
+
+    private void setToggleEvent(GridLayout mainGrid) {
+        for(int i = 0;i<mainGrid.getChildCount();i++){
+            final CardView cardView = (CardView)mainGrid.getChildAt(i);
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(cardView.getCardBackgroundColor().getDefaultColor()==-1){
+                        cardView.setCardBackgroundColor(Color.parseColor("#DDFBD6D1"));
+
+
+                    }else{
+                        cardView.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+
+                    }
+                }
+            });
+
+        }
+    }
+
+    private void setSingleEvent(GridLayout mainGrid) {
+        for(int i = 0;i<mainGrid.getChildCount();i++){
+            CardView cardView = (CardView)mainGrid.getChildAt(i);
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+        }
     }
 
 
-    }
+}

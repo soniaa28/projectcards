@@ -137,7 +137,9 @@ public class HomeFragment extends Fragment {
                             mBackground.setBackgroundResource(R.drawable.truenew);
                             makeToast(getContext(), "True");
                         } else {
-
+                            hearts.get(hearts.size()-1).setVisibility(View.INVISIBLE);
+                            //delete last heart, so next time we will make invisible another last element (heart)
+                            hearts.remove(hearts.size()-1);
                             mBackground.setBackgroundResource(R.drawable.falsenew);
                             makeToast(getContext(), "False");
 
