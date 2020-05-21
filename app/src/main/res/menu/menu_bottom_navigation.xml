@@ -14,14 +14,14 @@
         android:id="@+id/action_home"
         android:checked="true"
         android:icon="@drawable/ic_nav_home"
-        android:title="@string/tab1"
+        android:title="Play"
         />
 
     <item
         android:id="@+id/action_calendar"
         android:checked="true"
         android:icon="@drawable/ic_nav_calendar"
-        android:title="@string/tab3"
+        android:title="Categories"
         />
     </group>
 
