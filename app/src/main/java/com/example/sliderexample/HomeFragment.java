@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
 
     public ArrayList<TextView> hearts;
 
-    TextView tv;
+
 
 
     Button bt_restart;
@@ -135,14 +135,14 @@ public class HomeFragment extends Fragment {
 
 
                 try{
-                    Animation anim=AnimationUtils.loadAnimation(getContext(),R.anim.myalpha);
+
                     Card card = dbHelper.getCardByState(dataObject.toString());
                     Log.v("cards",card.toString());
 
                         if (card.getTF() == SLIDE_RIGHT) {
                             mBackground.setBackgroundResource(R.drawable.backtrue);
                             makeToast(getContext(), "True");
-                            tv.startAnimation(anim);
+
                         } else {
                             hearts.get(hearts.size()-1).setVisibility(View.INVISIBLE);
                             //delete last heart, so next time we will make invisible another last element (heart)
