@@ -15,6 +15,6 @@
     <string name="size">2sp</string>
 
     <color name="transparentBlack">#CF000000</color>
-    <color name="rose">#DDFBD6D1</color>
+    <color name="rose">#F7E6D1FB</color>
     <color name="black">#000000</color>
 </resources>

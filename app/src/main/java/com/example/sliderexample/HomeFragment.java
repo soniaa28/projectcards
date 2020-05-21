@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,6 +41,8 @@ public class HomeFragment extends Fragment {
 
     public ArrayList<TextView> hearts;
 
+    TextView tv;
+
 
     Button bt_restart;
 
@@ -56,6 +60,7 @@ public class HomeFragment extends Fragment {
         TextView l1 = rootView.findViewById(R.id.life1);
         TextView l2 = rootView.findViewById(R.id.life2);
         TextView l3 = rootView.findViewById(R.id.life3);
+
         hearts = new ArrayList<>();
         hearts.add(l1); hearts.add(l2); hearts.add(l3);
 
@@ -106,7 +111,7 @@ public class HomeFragment extends Fragment {
                     Card card = dbHelper.getCardByState(dataObject.toString());
                     Log.v("cards",card.toString());
                   if (card.getTF() == SLIDE_LEFT){
-                      mBackground.setBackgroundResource(R.drawable.truenew);
+                      mBackground.setBackgroundResource(R.drawable.backtrue);
                       makeToast(getContext(), "True");
                   }else{
                       //take last heart from array and make it invisible
@@ -114,7 +119,7 @@ public class HomeFragment extends Fragment {
                       //delete last heart, so next time we will make invisible another last element (heart)
                       hearts.remove(hearts.size()-1);
 
-                      mBackground.setBackgroundResource(R.drawable.falsenew);
+                      mBackground.setBackgroundResource(R.drawable.backfalse);
                       makeToast(getContext(), "False");
                   }
                 }catch(NullPointerException npe){
@@ -130,17 +135,19 @@ public class HomeFragment extends Fragment {
 
 
                 try{
+                    Animation anim=AnimationUtils.loadAnimation(getContext(),R.anim.myalpha);
                     Card card = dbHelper.getCardByState(dataObject.toString());
                     Log.v("cards",card.toString());
 
                         if (card.getTF() == SLIDE_RIGHT) {
-                            mBackground.setBackgroundResource(R.drawable.truenew);
+                            mBackground.setBackgroundResource(R.drawable.backtrue);
                             makeToast(getContext(), "True");
+                            tv.startAnimation(anim);
                         } else {
                             hearts.get(hearts.size()-1).setVisibility(View.INVISIBLE);
                             //delete last heart, so next time we will make invisible another last element (heart)
                             hearts.remove(hearts.size()-1);
-                            mBackground.setBackgroundResource(R.drawable.falsenew);
+                            mBackground.setBackgroundResource(R.drawable.backfalse);
                             makeToast(getContext(), "False");
 
                             };
@@ -153,6 +160,7 @@ public class HomeFragment extends Fragment {
                 }
 
             }
+
 
             @Override
             public void onAdapterAboutToEmpty(int itemsInAdapter) {

@@ -52,7 +52,7 @@ public class CalendarFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if(cardView.getCardBackgroundColor().getDefaultColor()==-1){
-                        cardView.setCardBackgroundColor(Color.parseColor("#DDFBD6D1"));
+                        cardView.setCardBackgroundColor(Color.parseColor("#F7E6D1FB"));
 
 
                     }else{
