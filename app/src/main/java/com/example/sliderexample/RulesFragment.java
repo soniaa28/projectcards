@@ -1,5 +1,6 @@
 package com.example.sliderexample;
 
+import android.animation.ArgbEvaluator;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,10 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RulesFragment extends Fragment {
-    GridLayout mainGrid;
-
 
     public RulesFragment() {
         //required empty public constructor
@@ -27,8 +30,6 @@ public class RulesFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_rules, container, false);
 
-
-
         return rootView;
     }
 
@@ -36,43 +37,9 @@ public class RulesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //textTitle.setText("Doing some things with fragments");
-        mainGrid=(GridLayout)view.findViewById(R.id.mainGrid);
-        //setSingleEvent(mainGrid);
-        setToggleEvent(mainGrid);
-
-    }
-
-    private void setToggleEvent(GridLayout mainGrid) {
-        for(int i = 0;i<mainGrid.getChildCount();i++){
-            final CardView cardView = (CardView)mainGrid.getChildAt(i);
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(cardView.getCardBackgroundColor().getDefaultColor()==-1){
-                        cardView.setCardBackgroundColor(Color.parseColor("#F7E6D1FB"));
 
 
-                    }else{
-                        cardView.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
 
-                    }
-                }
-            });
-
-        }
-    }
-
-    private void setSingleEvent(GridLayout mainGrid) {
-        for(int i = 0;i<mainGrid.getChildCount();i++){
-            CardView cardView = (CardView)mainGrid.getChildAt(i);
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-        }
     }
 
 
