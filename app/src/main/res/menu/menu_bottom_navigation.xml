@@ -23,6 +23,16 @@
         android:icon="@drawable/ic_nav_calendar"
         android:title="Categories"
         />
+
+        <item
+            android:id="@+id/action_rules"
+            android:checked="true"
+            android:icon="@drawable/ic_nav_calendar"
+            android:title="Categories"
+            />
+
+
+
     </group>
 
 </menu>

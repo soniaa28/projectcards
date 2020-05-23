@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     HomeFragment homeFragment;
     NotesFragment notesFragment;
     CalendarFragment calendarFragment;
+    RulesFragment rulesFragment;
+
 
     MenuItem prevMenuItem;
 
@@ -55,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.action_calendar:
                                 viewPager.setCurrentItem(2);
                                 return true;
+                            case R.id.action_rules:
+                                viewPager.setCurrentItem(3);
+                                return true;
+
                         }
                         return false;
                     }
@@ -109,9 +115,13 @@ public class MainActivity extends AppCompatActivity {
         homeFragment = new HomeFragment();
         notesFragment = new NotesFragment();
         calendarFragment = new CalendarFragment();
+        rulesFragment = new RulesFragment();
+
         adapter.addFragment(notesFragment);
         adapter.addFragment(homeFragment);
         adapter.addFragment(calendarFragment);
+        adapter.addFragment(rulesFragment);
+
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(1);
     }
