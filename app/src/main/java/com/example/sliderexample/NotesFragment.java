@@ -12,27 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class NotesFragment extends Fragment {
-    RecyclerView recyclerView;
-
-    RecyclerView.Adapter recyclerView_Adapter;
-
-    RecyclerView.LayoutManager recyclerViewLayoutManager;
-    String[] numbers = {
-            "one",
-            "two",
-            "three",
-            "four",
-            "five",
-            "six",
-            "seven",
-            "eight",
-            "nine",
-            "ten",
-            "eleven",
-
-    };
-
-
 
     public NotesFragment() {
         //required empty public constructor
@@ -45,14 +24,7 @@ public class NotesFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_notes, container, false);
 
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view1);
-        recyclerViewLayoutManager = new GridLayoutManager(getContext(), 2);
 
-        recyclerView.setLayoutManager(recyclerViewLayoutManager);
-
-        recyclerView_Adapter = new RecyclerViewAdapter(getContext(),numbers);
-
-        recyclerView.setAdapter(recyclerView_Adapter);
 
         return rootView;
     }

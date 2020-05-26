@@ -4,6 +4,8 @@ public class Card {
     private int id;
     private String state;
     private int tf;
+    private String topic;
+    private String rule;
 
 
     @Override
@@ -12,19 +14,28 @@ public class Card {
                 "id=" + id +
                 ", state='" + state + '\'' +
                 ", tf='" + tf + '\''+
+                ", topic='" + topic + '\''+
+                ", rule='" + rule + '\''+
            '}';
     }
 
 
-    public Card(int id, String state, int tf) {
+    public Card(int id, String state, int tf, String topic, String rule) {
         this.id = id;
         this.state = state;
         this.tf = tf;
+        this.topic=topic;
+        this.rule=rule;
 
     }
-    public Card(String state, int tf) {
+
+
+
+    public Card(String state, int tf, String topic, String rule) {
         this.state = state;
         this.tf= tf;
+        this.topic=topic;
+        this.rule=rule;
 
 
     }
@@ -51,6 +62,18 @@ public class Card {
         this.tf = tf;
     }
 
+    public String getTopic() {
+        return topic;
+    }
 
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+    public String getRule() {
+        return rule;
+    }
 
+    public void setRule(String rule) {
+        this.rule = rule;
+    }
 }

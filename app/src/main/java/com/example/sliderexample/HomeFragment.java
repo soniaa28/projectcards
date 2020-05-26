@@ -34,20 +34,23 @@ public class HomeFragment extends Fragment {
     private ArrayAdapter<String> arrayAdapter;
     private int i;
     private ConstraintLayout mBackground;
+    private TextView point;
     private DBCards dbHelper;
 
     private static final int SLIDE_LEFT= 0;
     private static final int SLIDE_RIGHT= 1;
+    private int score=0;
+
 
     public ArrayList<TextView> hearts;
 
 
 
 
-    Button bt_restart;
 
     public HomeFragment() {
         //required empty public constructor
+
     }
 
     //initialize all views from xml in onCreateView
@@ -67,6 +70,10 @@ public class HomeFragment extends Fragment {
         Window w =  getActivity().getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mBackground=rootView.findViewById(R.id.background);
+        point = rootView.findViewById(R.id.score);
+
+
+
 
 
 
@@ -82,6 +89,7 @@ public class HomeFragment extends Fragment {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         dbHelper.logDB();
         database.close();
+
 
         arcards = dbHelper.getObjectListFromDB();
         for(Card temp: arcards){
@@ -108,11 +116,18 @@ public class HomeFragment extends Fragment {
             @Override
             public void onLeftCardExit(Object dataObject) {
                 try{
+
                     Card card = dbHelper.getCardByState(dataObject.toString());
                     Log.v("cards",card.toString());
+
                   if (card.getTF() == SLIDE_LEFT){
                       mBackground.setBackgroundResource(R.drawable.backtrue);
                       makeToast(getContext(), "True");
+                      score+=1;
+                      point.setText(String.valueOf(score));
+
+
+
                   }else{
                       //take last heart from array and make it invisible
                       hearts.get(hearts.size()-1).setVisibility(View.INVISIBLE);
@@ -121,6 +136,7 @@ public class HomeFragment extends Fragment {
 
                       mBackground.setBackgroundResource(R.drawable.backfalse);
                       makeToast(getContext(), "False");
+                      ;
                   }
                 }catch(NullPointerException npe){
                     Log.v("cards","no card found");
@@ -142,6 +158,8 @@ public class HomeFragment extends Fragment {
                         if (card.getTF() == SLIDE_RIGHT) {
                             mBackground.setBackgroundResource(R.drawable.backtrue);
                             makeToast(getContext(), "True");
+                            score+=1;
+                            point.setText(String.valueOf(score));
 
                         } else {
                             hearts.get(hearts.size()-1).setVisibility(View.INVISIBLE);

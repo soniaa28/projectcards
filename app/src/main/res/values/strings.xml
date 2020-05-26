@@ -4,5 +4,6 @@
     <string name="tab1">Home</string>
     <string name="tab2">Notes</string>
     <string name="tab3">Calendar</string>
+    <string name="message_text">Text of your message</string>
 
 </resources>

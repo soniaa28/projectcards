@@ -12,15 +12,17 @@ public class DBCards extends SQLiteOpenHelper {
     private static DBCards sInstance;
 
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "cardsDB";
+    public static final String DATABASE_NAME = "cardsDBase";
 
     public static final String TABLE_CARDS = "cards";
     public static final String KEY_ID = "_id";
     public static final String KEY_STATE = "state";
     public static final String KEY_TF = "tf";
+    public static final String KEY_TOPIC= " topic";
+    public static final String KEY_RULE="rule";
 
 
-    static final String[] COLUMNS = {KEY_ID, KEY_STATE, KEY_TF};
+    static final String[] COLUMNS = {KEY_ID, KEY_STATE, KEY_TF, KEY_TOPIC,KEY_RULE};
 
 
 
@@ -41,7 +43,7 @@ public class DBCards extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //Create table with accounts
         db.execSQL("create table " + TABLE_CARDS + "(" + KEY_ID
-                + " integer primary key," + KEY_STATE + " text," + KEY_TF + " integer"  + ")");
+                + " integer primary key," + KEY_STATE + " text," + KEY_TF + " integer,"  + KEY_TOPIC + " text," + KEY_RULE + " text" +")");
     }
 
 
@@ -65,10 +67,15 @@ public class DBCards extends SQLiteOpenHelper {
             int stateIndex = cursor.getColumnIndex(KEY_STATE);
             int tfIndex = cursor.getColumnIndex(KEY_TF);
             int idIndex = cursor.getColumnIndex(KEY_ID);
+            int topicIndex= cursor.getColumnIndex(KEY_TOPIC);
+            int rulesIndex=cursor.getColumnIndex(KEY_RULE);
             do {
                 ar.add(new Card(cursor.getInt(idIndex),
                         cursor.getString(stateIndex),
-                        cursor.getInt(tfIndex)
+                        cursor.getInt(tfIndex),
+                        cursor.getString(topicIndex),
+                        cursor.getString(rulesIndex)
+
               ));
             } while (cursor.moveToNext());
         }
@@ -97,10 +104,15 @@ public class DBCards extends SQLiteOpenHelper {
             int idIndex = cursor.getColumnIndex(KEY_ID); // 0
             int stateIndex = cursor.getColumnIndex(KEY_STATE); // 1
             int tfIndex = cursor.getColumnIndex(KEY_TF); // 2
+            int topicIndex =cursor.getColumnIndex(KEY_TOPIC);
+            int rulesIndex=cursor.getColumnIndex(KEY_RULE);
             do{
                 Log.d("mLog", "ID = " + cursor.getInt(idIndex) +
                         ", state = " + cursor.getString(stateIndex)+
-                        ", tf = " + cursor.getInt(tfIndex));
+                        ", tf = " + cursor.getInt(tfIndex)+
+                        ", rules = " + cursor.getString(rulesIndex)+
+                        ", topic = " + cursor.getString(topicIndex));
+
 
             }while (cursor.moveToNext());
         }else
@@ -108,20 +120,23 @@ public class DBCards extends SQLiteOpenHelper {
         cursor.close();
 
     }
-         public Card getCardByState(String state) {
+         public  Card getCardByState(String state) {
              SQLiteDatabase database = getReadableDatabase();
              Cursor cursor = database.query(TABLE_CARDS, null, null, null, null, null, null);
              if (cursor.moveToFirst()) {
                  int idIndex = cursor.getColumnIndex(KEY_ID); // 0
                  int stateIndex = cursor.getColumnIndex(KEY_STATE); // 1
                  int tfIndex = cursor.getColumnIndex(KEY_TF); // 2
+                 int topicIndex =cursor.getColumnIndex(KEY_TOPIC);
+                 int rulesIndex = cursor.getColumnIndex(KEY_RULE);
                  while (cursor.moveToNext()) {
                      if(cursor.getString(stateIndex).equals(state)){
-                         return new Card(cursor.getInt(idIndex),cursor.getString(stateIndex),cursor.getInt(tfIndex));
+                         return new Card(cursor.getInt(idIndex),cursor.getString(stateIndex),cursor.getInt(tfIndex), cursor.getString(topicIndex), cursor.getString(rulesIndex));
                      }
 
                  }
              }
              return null;
          }
+
 }

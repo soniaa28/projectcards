@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 public class CalendarFragment extends Fragment {
     GridLayout mainGrid;
+    TextView tev;
 
 
     public CalendarFragment() {
@@ -28,7 +29,7 @@ public class CalendarFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
-
+        tev=rootView.findViewById(R.id.tev);
 
 
         return rootView;
@@ -53,6 +54,7 @@ public class CalendarFragment extends Fragment {
                 public void onClick(View v) {
                     if(cardView.getCardBackgroundColor().getDefaultColor()==-1){
                         cardView.setCardBackgroundColor(Color.parseColor("#F7E6D1FB"));
+                        tev.setText("1");
 
 
                     }else{

@@ -12,4 +12,90 @@
         <item name="android:fontFamily">@font/raleway</item>
     </style>
 
+    <style name="records">
+
+        <item name="android:textSize">
+            46sp
+        </item>
+
+        <item name="android:textColor">
+            #FDFFA5
+        </item>
+
+        <item name="android:shadowColor">
+            #40000000
+        </item>
+
+        <item name="android:shadowDx">
+            0
+        </item>
+
+        <item name="android:shadowDy">
+            6
+        </item>
+
+        <item name="android:shadowRadius">
+            4
+        </item>
+
+    </style>
+
+    <style name="best_">
+
+        <item name="android:textSize">
+            40sp
+        </item>
+
+        <item name="android:textColor">
+            #FFFFFF
+        </item>
+
+        <item name="android:shadowColor">
+            #40000000
+        </item>
+
+        <item name="android:shadowDx">
+            0
+        </item>
+
+        <item name="android:shadowDy">
+            4
+        </item>
+
+        <item name="android:shadowRadius">
+            4
+        </item>
+
+
+    </style>
+    <style name="goal">
+
+        <item name="android:textSize">
+            40sp
+        </item>
+
+        <item name="android:textColor">
+            #FDFFA5
+        </item>
+
+        <item name="android:shadowColor">
+            #40000000
+        </item>
+
+        <item name="android:shadowDx">
+            0
+        </item>
+
+        <item name="android:shadowDy">
+            4
+        </item>
+
+        <item name="android:shadowRadius">
+            4
+        </item>
+
+
+    </style>
+
+
 </resources>
