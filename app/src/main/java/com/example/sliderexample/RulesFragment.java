@@ -83,7 +83,10 @@ public class RulesFragment extends Fragment implements SearchView.OnQueryTextLis
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Card card = dbHelper.getCardByState(list_cards.getItemAtPosition(position).toString());
                 Bundle bundle = new Bundle();
+
                 bundle.putString("TEXT",card.getRule());
+                bundle.putString("STATE",card.getState());
+
 
                 dlg1.setArguments(bundle);
                 dlg1.show(getFragmentManager(), "dlg1");

@@ -21,12 +21,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import static com.example.sliderexample.CalendarFragment.topics;
 
 public class HomeFragment extends Fragment {
     private ArrayList<String> al;
@@ -40,6 +42,7 @@ public class HomeFragment extends Fragment {
     private static final int SLIDE_LEFT= 0;
     private static final int SLIDE_RIGHT= 1;
     private int score=0;
+
 
 
     public ArrayList<TextView> hearts;
@@ -76,7 +79,6 @@ public class HomeFragment extends Fragment {
 
 
 
-
         return rootView ;
     }
 
@@ -91,14 +93,26 @@ public class HomeFragment extends Fragment {
         database.close();
 
 
-        arcards = dbHelper.getObjectListFromDB();
+
+
+        al = new ArrayList<>();
+        al.add("PLAY");
+        if(topics != null){
+            al.addAll(dbHelper.getCardByTopics(topics));
+            arcards = dbHelper.getObjectListFromDBbyTopic(topics);
+
+        }  else{
+            al.addAll(dbHelper.getListFromDB()) ;
+            arcards = dbHelper.getObjectListFromDB();
+
+
+        }
         for(Card temp: arcards){
             Log.v("card",temp.toString() );
         }
 
-        al = new ArrayList<>();
-        al.add("PLAY");
-        al.addAll(dbHelper.getListFromDB()) ;
+
+
 
         arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.item, R.id.helloText, al );
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView)view.findViewById(R.id.frame);
@@ -109,6 +123,7 @@ public class HomeFragment extends Fragment {
                 // this is the simplest way to delete an object from the Adapter (/AdapterView)
                 Log.d("LIST", "removed object!");
                 al.remove(0);
+
                 arrayAdapter.notifyDataSetChanged();
             }
 
@@ -121,7 +136,7 @@ public class HomeFragment extends Fragment {
                     Log.v("cards",card.toString());
 
                   if (card.getTF() == SLIDE_LEFT){
-                      mBackground.setBackgroundResource(R.drawable.backtrue);
+                      mBackground.setBackgroundResource(R.drawable.backnewtrue);
                       makeToast(getContext(), "True");
                       score+=1;
                       point.setText(String.valueOf(score));
@@ -134,7 +149,7 @@ public class HomeFragment extends Fragment {
                       //delete last heart, so next time we will make invisible another last element (heart)
                       hearts.remove(hearts.size()-1);
 
-                      mBackground.setBackgroundResource(R.drawable.backfalse);
+                      mBackground.setBackgroundResource(R.drawable.backnewfalse);
                       makeToast(getContext(), "False");
                       ;
                   }
@@ -156,7 +171,7 @@ public class HomeFragment extends Fragment {
                     Log.v("cards",card.toString());
 
                         if (card.getTF() == SLIDE_RIGHT) {
-                            mBackground.setBackgroundResource(R.drawable.backtrue);
+                            mBackground.setBackgroundResource(R.drawable.backnewtrue);
                             makeToast(getContext(), "True");
                             score+=1;
                             point.setText(String.valueOf(score));
@@ -165,7 +180,7 @@ public class HomeFragment extends Fragment {
                             hearts.get(hearts.size()-1).setVisibility(View.INVISIBLE);
                             //delete last heart, so next time we will make invisible another last element (heart)
                             hearts.remove(hearts.size()-1);
-                            mBackground.setBackgroundResource(R.drawable.backfalse);
+                            mBackground.setBackgroundResource(R.drawable.backnewfalse);
                             makeToast(getContext(), "False");
 
                             };

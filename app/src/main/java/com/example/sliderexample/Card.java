@@ -13,10 +13,10 @@ public class Card {
         return "Contact{" +
                 "id=" + id +
                 ", state='" + state + '\'' +
-                ", tf='" + tf + '\''+
-                ", topic='" + topic + '\''+
-                ", rule='" + rule + '\''+
-           '}';
+                ", tf='" + tf + '\'' +
+                ", topic='" + topic + '\'' +
+                ", rule='" + rule + '\'' +
+                '}';
     }
 
 
@@ -24,21 +24,21 @@ public class Card {
         this.id = id;
         this.state = state;
         this.tf = tf;
-        this.topic=topic;
-        this.rule=rule;
+        this.topic = topic;
+        this.rule = rule;
 
     }
-
 
 
     public Card(String state, int tf, String topic, String rule) {
         this.state = state;
-        this.tf= tf;
-        this.topic=topic;
-        this.rule=rule;
+        this.tf = tf;
+        this.topic = topic;
+        this.rule = rule;
 
 
     }
+
     public int getId() {
         return id;
     }
@@ -46,12 +46,13 @@ public class Card {
     public void setId(int id) {
         this.id = id;
     }
+
     public String getState() {
         return state;
     }
 
     public void setState(String name) {
-        this.state= state;
+        this.state = state;
     }
 
     public int getTF() {
@@ -69,6 +70,7 @@ public class Card {
     public void setTopic(String topic) {
         this.topic = topic;
     }
+
     public String getRule() {
         return rule;
     }
@@ -76,4 +78,6 @@ public class Card {
     public void setRule(String rule) {
         this.rule = rule;
     }
+
+
 }

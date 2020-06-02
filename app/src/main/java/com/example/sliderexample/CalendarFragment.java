@@ -2,6 +2,7 @@ package com.example.sliderexample;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CalendarFragment extends Fragment {
     GridLayout mainGrid;
-    TextView tev;
+    static ArrayList<String> topics;
+    Map <Integer,String> categories;
+
 
 
     public CalendarFragment() {
@@ -29,7 +37,7 @@ public class CalendarFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
-        tev=rootView.findViewById(R.id.tev);
+
 
 
         return rootView;
@@ -43,24 +51,51 @@ public class CalendarFragment extends Fragment {
         mainGrid=(GridLayout)view.findViewById(R.id.mainGrid);
         //setSingleEvent(mainGrid);
         setToggleEvent(mainGrid);
+        categories=new HashMap<>();
+
+        categories.put(0,"правопис");
+        categories.put(1,"наголос");
+        categories.put(2,"дефіс");
+        categories.put(3,"синтаксис");
+
+        topics = new ArrayList<>();
 
     }
 
-    private void setToggleEvent(GridLayout mainGrid) {
+    private void setToggleEvent(final GridLayout mainGrid) {
         for(int i = 0;i<mainGrid.getChildCount();i++){
             final CardView cardView = (CardView)mainGrid.getChildAt(i);
+            final int position=i;
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(cardView.getCardBackgroundColor().getDefaultColor()==-1){
                         cardView.setCardBackgroundColor(Color.parseColor("#F7E6D1FB"));
-                        tev.setText("1");
+                        topics.add(categories.get(position));
+                        Log.v("message",categories.get(position) + "");
+
 
 
                     }else{
                         cardView.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+                        topics.remove(categories.get(position));
+
+
+
 
                     }
+/*
+
+                    Fragment currentFragment = getFragmentManager().findFragmentByTag("HomeFragment");
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.detach(currentFragment);
+                    fragmentTransaction.attach(currentFragment);
+                    fragmentTransaction.commit();
+*/
+
+
+
+
                 }
             });
 

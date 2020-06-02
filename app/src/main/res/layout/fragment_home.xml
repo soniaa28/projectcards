@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/background"
-    android:background="@drawable/mainbge">
+    android:background="@drawable/recordbg"
+    android:tag="HomeFragment">
 
     <com.lorentzos.flingswipe.SwipeFlingAdapterView
         android:id="@+id/frame"
@@ -29,7 +30,7 @@
 
         <TextView
             android:id="@+id/life1"
-            android:layout_width="25dp"
+            android:layout_width="15dp"
             android:layout_height="40dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
@@ -39,7 +40,7 @@
 
         <TextView
             android:id="@+id/life2"
-            android:layout_width="25dp"
+            android:layout_width="21dp"
             android:layout_height="40dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
@@ -50,7 +51,7 @@
 
         <TextView
             android:id="@+id/life3"
-            android:layout_width="25dp"
+            android:layout_width="21dp"
             android:layout_height="40dp"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
@@ -58,38 +59,36 @@
 
     </LinearLayout>
 
-
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="105dp"
-        android:layout_height="74dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="50dp"
-        android:layout_weight="1"
-        android:text="Score:"
-        android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:id="@+id/scoreback"
+        android:layout_width="137dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/scorenew"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/frame"
-        app:layout_constraintVertical_bias="0.16000003">
-
+        app:layout_constraintTop_toTopOf="parent">
 
     </TextView>
 
     <TextView
         android:id="@+id/score"
-        android:layout_width="106dp"
-        android:layout_height="84dp"
-        android:layout_marginStart="53dp"
+        android:layout_width="32dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="2dp"
         android:layout_weight="1"
 
-        android:text="point"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/textView3">
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/scoreback"
+        app:layout_constraintHorizontal_bias="0.84"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scoreback">
 
     </TextView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

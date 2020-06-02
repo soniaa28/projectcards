@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 public class Dialog extends DialogFragment implements OnClickListener {
     TextView ruletext;
+    TextView stateru;
 
     final String LOG_TAG = "myLogs";
     @Override
@@ -24,10 +25,14 @@ public class Dialog extends DialogFragment implements OnClickListener {
         View v = inflater.inflate(R.layout.dialog, null);
 
         Bundle bundle = getArguments();
+        String state= bundle.getString("STATE","");
         String imageLink = bundle.getString("TEXT","");
 
         ruletext= (TextView) v.findViewById(R.id.textrule);
         ruletext.setText(imageLink);
+
+        stateru=(TextView) v.findViewById(R.id.state_ru);
+        stateru.setText(state);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(v);

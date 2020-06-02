@@ -7,12 +7,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class DBCards extends SQLiteOpenHelper {
     private static DBCards sInstance;
 
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "cardsDBase";
+    public static final String DATABASE_NAME = "cardsDBase28";
 
     public static final String TABLE_CARDS = "cards";
     public static final String KEY_ID = "_id";
@@ -139,4 +140,53 @@ public class DBCards extends SQLiteOpenHelper {
              return null;
          }
 
+    public ArrayList<String> getCardByTopics(ArrayList<String> topics) {
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<String> ar = new ArrayList<>();
+        Cursor cursor = db.query(TABLE_CARDS, null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            int stateIndex = cursor.getColumnIndex(KEY_STATE);
+            int topicIndex = cursor.getColumnIndex(KEY_TOPIC);
+            do {
+                String topicDB = cursor.getString(topicIndex);
+                for(String topic : topics){
+                    if(topic.equals(topicDB)){
+                        String n = cursor.getString(stateIndex);
+                        ar.add(n);
+
+                    }
+                }
+
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return ar;
+    }
+
+
+    public ArrayList<Card> getObjectListFromDBbyTopic(ArrayList <String> topics) {
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<Card> ar = new ArrayList<>();
+        Cursor cursor = db.query(TABLE_CARDS, null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            int stateIndex = cursor.getColumnIndex(KEY_STATE);
+            int tfIndex = cursor.getColumnIndex(KEY_TF);
+            int idIndex = cursor.getColumnIndex(KEY_ID);
+            int topicIndex= cursor.getColumnIndex(KEY_TOPIC);
+            int rulesIndex=cursor.getColumnIndex(KEY_RULE);
+            do {
+                for(String topic : topics){
+                    if(topic.equals(cursor.getString(topicIndex))){
+                ar.add(new Card(cursor.getInt(idIndex),
+                        cursor.getString(stateIndex),
+                        cursor.getInt(tfIndex),
+                        cursor.getString(topicIndex),
+                        cursor.getString(rulesIndex)
+
+                ));}}
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return ar;
+    }
 }

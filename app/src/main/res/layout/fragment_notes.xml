@@ -5,51 +5,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/reccbg"
+    android:background="@drawable/topicbg"
     android:layout_gravity="center"
 
 >
 
-
     <LinearLayout
-        android:layout_width="400dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="166dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/rectangle_1"
+            android:layout_width="281dp"
+            android:layout_height="113dp"
+            android:layout_marginLeft="66dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/namerecorn"
+            android:gravity="center"
+            android:text="Records"
+            android:textAppearance="@style/record" />
 
-           android:layout_marginLeft="250dp"
-            android:id="@+id/record"
-            android:layout_width="90dp"
-            android:layout_height="40dp"
-            android:textAppearance="@style/best_"
-            android:text=" 20 " />
-
-        <Space
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="28dp" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
-        <TextView
+            <TextView
+                android:id="@+id/ach1"
+                android:layout_width="140dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="50dp"
 
-            android:layout_marginLeft="250dp"
-            android:id="@+id/goal"
-            android:layout_width="90dp"
-            android:layout_height="40dp"
-            android:textAppearance="@style/goal"
-            android:text=" 20 " />
+                android:background="@drawable/d1">
 
-        <Space
+            </TextView>
+            <TextView
+                android:id="@+id/ach2"
+                android:layout_width="140dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="50dp"
+
+                android:background="@drawable/d2">
+
+            </TextView>
+
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="26dp" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
-        <TextView
+            <TextView
+                android:id="@+id/ach3"
+                android:layout_width="140dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="50dp"
 
-            android:layout_marginLeft="250dp"
-            android:id="@+id/avg"
-            android:layout_width="90dp"
-            android:layout_height="40dp"
-            android:textAppearance="@style/best_"
-            android:text=" 20 " />
+                android:background="@drawable/d3">
+
+            </TextView>
+            <TextView
+                android:id="@+id/ach4"
+                android:layout_width="140dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="50dp"
+
+                android:background="@drawable/d4">
+
+            </TextView>
+
+
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

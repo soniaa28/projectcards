@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         final BottomNavigationView bottomNavigationView;
         //Initializing viewPager
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setOffscreenPageLimit(2);
+        viewPager.setOffscreenPageLimit(0);
 
         //Initializing the bottomNavigationView
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
