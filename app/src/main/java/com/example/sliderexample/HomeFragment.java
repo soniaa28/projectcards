@@ -1,6 +1,7 @@
 package com.example.sliderexample;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,6 +44,7 @@ public class HomeFragment extends Fragment {
     private static final int SLIDE_RIGHT= 1;
     private int score=0;
 
+    SharedPreferences sPref;
 
 
     public ArrayList<TextView> hearts;
@@ -128,15 +130,17 @@ public class HomeFragment extends Fragment {
             }
 
 
+
             @Override
             public void onLeftCardExit(Object dataObject) {
                 try{
+
 
                     Card card = dbHelper.getCardByState(dataObject.toString());
                     Log.v("cards",card.toString());
 
                   if (card.getTF() == SLIDE_LEFT){
-                      mBackground.setBackgroundResource(R.drawable.backnewtrue);
+                      mBackground.setBackgroundResource(R.drawable.playbft);
                       makeToast(getContext(), "True");
                       score+=1;
                       point.setText(String.valueOf(score));
@@ -144,13 +148,22 @@ public class HomeFragment extends Fragment {
 
 
                   }else{
-                      //take last heart from array and make it invisible
-                      hearts.get(hearts.size()-1).setVisibility(View.INVISIBLE);
-                      //delete last heart, so next time we will make invisible another last element (heart)
-                      hearts.remove(hearts.size()-1);
+                          //take last heart from array and make it invisible
+                          hearts.get(hearts.size() - 1).setVisibility(View.INVISIBLE);
+                          //delete last heart, so next time we will make invisible another last element (heart)
+                          hearts.remove(hearts.size() - 1);
 
-                      mBackground.setBackgroundResource(R.drawable.backnewfalse);
-                      makeToast(getContext(), "False");
+                          mBackground.setBackgroundResource(R.drawable.playbgf);
+                          makeToast(getContext(), "False");
+                      if (hearts.isEmpty()){
+                          makeToast(getContext(), "You prograli");
+                          getContext();
+                          sPref = getContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                          SharedPreferences.Editor ed = sPref.edit();
+                          ed.putString("record", String.valueOf(score));
+                          ed.commit();
+                      }
+
                       ;
                   }
                 }catch(NullPointerException npe){
@@ -167,11 +180,12 @@ public class HomeFragment extends Fragment {
 
                 try{
 
+
                     Card card = dbHelper.getCardByState(dataObject.toString());
                     Log.v("cards",card.toString());
 
                         if (card.getTF() == SLIDE_RIGHT) {
-                            mBackground.setBackgroundResource(R.drawable.backnewtrue);
+                            mBackground.setBackgroundResource(R.drawable.playbft);
                             makeToast(getContext(), "True");
                             score+=1;
                             point.setText(String.valueOf(score));
@@ -180,8 +194,16 @@ public class HomeFragment extends Fragment {
                             hearts.get(hearts.size()-1).setVisibility(View.INVISIBLE);
                             //delete last heart, so next time we will make invisible another last element (heart)
                             hearts.remove(hearts.size()-1);
-                            mBackground.setBackgroundResource(R.drawable.backnewfalse);
+                            mBackground.setBackgroundResource(R.drawable.playbgf);
                             makeToast(getContext(), "False");
+                            if (hearts.isEmpty()){
+                                makeToast(getContext(), "You prograli");
+                                getContext();
+                                sPref = getContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor ed = sPref.edit();
+                                ed.putString("record", String.valueOf(score));
+                                ed.commit();
+                            }
 
                             };
 

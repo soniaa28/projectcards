@@ -1,5 +1,7 @@
 package com.example.sliderexample;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,6 +21,10 @@ public class NotesFragment extends Fragment implements View.OnClickListener {
     private TextView ach2;
     private TextView ach3;
     private TextView ach4;
+    private TextView record;
+    SharedPreferences sPref;
+    private int score =20;
+    private TextView ochko;
 
     public NotesFragment() {
         //required empty public constructor
@@ -38,6 +44,9 @@ public class NotesFragment extends Fragment implements View.OnClickListener {
         ach2.setOnClickListener(this);
         ach3.setOnClickListener(this);
         ach4.setOnClickListener(this);
+        record= rootView.findViewById(R.id.record);
+
+
 
 
 
@@ -52,6 +61,11 @@ public class NotesFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        sPref = getContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        record.setText(sPref.getString("record", ""));
+
+
+
 
 
        //textTitle.setText("Doing some things with fragments");
